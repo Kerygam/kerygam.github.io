@@ -13,6 +13,7 @@
             height: 100vh;
             overflow: hidden;
             position: relative;
+            font-family: Arial, sans-serif;
         }
 
         /* Háttér réteg */
@@ -27,6 +28,22 @@
             background-position: center;
             filter: blur(10px); /* Csak a háttér homályos */
             z-index: -1; /* A háttér maradjon a tartalom mögött */
+        }
+
+        /* Hóesés animáció */
+        .emoji {
+            position: absolute;
+            top: -20px;
+            font-size: 25px;
+            opacity: 0.9;
+            animation: fall linear infinite;
+        }
+
+        /* Animáció: eső emojikkal */
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
         }
 
         /* Tartalom */
@@ -48,7 +65,6 @@
             border-radius: 10px; /* Kisebb lekerekítés */
         }
 
-        /* A KERYGAM felirat margin-top-ja */
         h1 {
             margin-top: 30px; /* Növelve a felirat távolságát a profilképtől */
         }
@@ -89,6 +105,9 @@
     <!-- Háttér -->
     <div class="background"></div>
 
+    <!-- Hóesés generálás és karácsonyi emojik -->
+    <div id="snow"></div>
+
     <!-- Tartalom -->
     <div class="container">
         <div class="profile-img"></div>
@@ -96,17 +115,31 @@
         <ul class="links">
             <li><a href="https://www.instagram.com/malgartin/" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li>
             <li><a href="https://www.tiktok.com/@kerygam" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a></li>
-			<li><a href="https://www.twitch.tv/kerygam" target="_blank"><i class="fab fa-twitch"></i> Twitch</a></li>
-           <li><a href="https://www.snapchat.com/add/malgartin" target="_blank"><i class="fab fa-snapchat"></i> Snapchat</a></li>
-
+            <li><a href="https://www.twitch.tv/kerygam" target="_blank"><i class="fab fa-twitch"></i> Twitch</a></li>
+            <li><a href="https://www.snapchat.com/add/malgartin" target="_blank"><i class="fab fa-snapchat"></i> Snapchat</a></li>
         </ul>
 
         <!-- Spotify Lejátszó -->
         <div class="spotify-embed">
             <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/6MZqPtmhyVsE7AcNxi2IUC?utm_source=generator&autoplay=true" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-
         </div>
     </div>
+
+    <script>
+        // Karácsonyi és hópehely emojik létrehozása
+        const emojis = ['❄️'];
+        const snowContainer = document.getElementById('snow');
+        
+        for (let i = 0; i < 100; i++) {
+            const emoji = document.createElement('div');
+            emoji.classList.add('emoji');
+            emoji.innerHTML = emojis[Math.floor(Math.random() * emojis.length)]; // Véletlenszerű emoji kiválasztás
+            emoji.style.left = Math.random() * 100 + '%'; // Véletlenszerű pozíció
+            emoji.style.animationDuration = Math.random() * 5 + 5 + 's'; // Véletlenszerű sebesség
+            emoji.style.fontSize = Math.random() * 20 + 20 + 'px'; // Véletlenszerű méret
+            snowContainer.appendChild(emoji);
+        }
+    </script>
 
 </body>
 </html>
